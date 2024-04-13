@@ -1,66 +1,22 @@
-<div align="center">
-<a href="https://github.com/dockur/samba"><img src="https://raw.githubusercontent.com/dockur/samba/master/.github/logo.png" title="Logo" style="max-width:100%;" width="256" /></a>
-</div>
-<div align="center">
+## Use the TimeMachine image
 
-[![Build]][build_url]
-[![Version]][tag_url]
-[![Size]][tag_url]
-[![Pulls]][hub_url]
+*Changes*
 
-</div></h1>
-
-Docker container of Samba, an implementation of the Windows SMB networking protocol.
-
-## How to use
-
-Via Docker Compose:
-
-```yaml
-version: "3"
-services:
-  samba:
-    image: dockurr/samba
-    container_name: samba
-    environment:
-      USER: "samba"
-      PASS: "secret"
-    ports:
-      - 445:445
-    volumes:
-      - /home/example:/storage
-    restart: on-failure
+```
+$ git show cd9df81d5c883e4b62249114a5190ad3e6efd483
 ```
 
-Via Docker CLI:
+**LINKS** https://github.com/rootkiter/samba-for-timemachine/commit/cd9df81d5c883e4b62249114a5190ad3e6efd483
 
-```bash
-docker run -it --rm -p 445:445 -e "USER=samba" -e "PASS=secret" -v "/home/example:/storage" dockurr/samba
+*How To Build*:
+
+```
+docker build -t r00kiter/samba-for-timemachine:v1.0 .
 ```
 
-## FAQ
+*Use My Image*
 
-  * ### How do I modify the configuration?
+```
+docker run -itd --rm -p 445:445 -e "USER=samba" -e "PASS=secret" -v "/home/example:/storage" r00kiter/samba-for-timemachine:v1.0
+```
 
-    You can set the `USER` and `PASS` environment variables to modify the credentials for the share from their defaults (user `samba` with password `secret`).
-
-    You can set `UID` and `GID` environment variables to change the user/group id's, and set `RW: false` to make the share read-only.
-
-    If you need more advanced features, you can modify the `smb.conf` file in this repo, and bind mount it to the container like this:
-
-    ```yaml
-    volumes:
-      - /example/smb.conf:/etc/samba/smb.conf
-    ```
-
-## Stars
-[![Stars](https://starchart.cc/dockur/samba.svg?variant=adaptive)](https://starchart.cc/dockur/samba)
-
-[build_url]: https://github.com/dockur/samba/
-[hub_url]: https://hub.docker.com/r/dockurr/samba
-[tag_url]: https://hub.docker.com/r/dockurr/samba/tags
-
-[Build]: https://github.com/dockur/samba/actions/workflows/build.yml/badge.svg
-[Size]: https://img.shields.io/docker/image-size/dockurr/samba/latest?color=066da5&label=size
-[Pulls]: https://img.shields.io/docker/pulls/dockurr/samba.svg?style=flat&label=pulls&logo=docker
-[Version]: https://img.shields.io/docker/v/dockurr/samba/latest?arch=amd64&sort=semver&color=066da5
